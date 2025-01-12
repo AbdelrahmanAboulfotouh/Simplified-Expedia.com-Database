@@ -1,1 +1,0 @@
-# Simplified-Expedia.com-Database
