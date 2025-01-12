@@ -35,55 +35,65 @@ The database includes the following entities:
 #### Users
   
 - **Purpose**: Store information about the application's users (both customers and admins).  
-- **The `user` table includes**:
+- **The `users` table includes**:
   - `user_id` (Primary Key)
   - `username` (Unique, String)
   - `password` (Hashed, String)
   - `email` (Unique, String)
-  - `user_type` (Enum: `Admin`, `Customer`)  
-#### Instructors
+  - `user_type` (Enum: `Admin`, `Customer`)
+    
+#### Itineraries
 
-The `instructors` table includes:
+- **Purpose**: Store information about each user's itinerary.  
+- **The `Itineraries` table includes**:
+     - `itinerary_id` (Primary Key)
+     - `user_id` (Foreign Key to `Users.user_id`)
+     - `itinerary_name` (String, e.g., "Vacation to Hawaii")
+     - `created_at` (Timestamp)
+     - `total_cost` (Decimal, Auto-calculated)
 
-* `id`, which specifies the unique ID for the instructor as an `INTEGER`. This column thus has the `PRIMARY KEY` constraint applied.
-* `first_name`, which specifies the instructor's first name as `TEXT`.
-* `last_name`, which specifies the instructor's last name as `TEXT`.
+#### Flights
 
-All columns in the `instructors` table are required and hence should have the `NOT NULL` constraint applied. No other constraints are necessary.
+   - **Purpose**: Store flight information for itinerary items.  
+   - **The `Flights` table includes**:
+       - `flight_id` (Primary Key)
+       - `itinerary_id` (Foreign Key to `Itineraries.itinerary_id`)
+       - `departure_city` (String)
+       - `arrival_city` (String)
+       - `departure_date` (Date)
+       - `return_date` (Date, Nullable for one-way flights)
+       - `cost` (Decimal)
 
-#### Problems
+#### Hotels
 
-The `problems` table includes:
+   - **Purpose**: Store hotel booking information for itinerary items.  
+   - **The `Flights` table includes**:
+     - `hotel_id` (Primary Key)
+     - `itinerary_id` (Foreign Key to `Itineraries.itinerary_id`)
+     - `hotel_name` (String)
+     - `location` (String)
+     - `check_in_date` (Date)
+     - `check_out_date` (Date)
+     - `price_per_night` (Decimal)
+     - `total_nights` (Integer, Auto-calculated)
+     - `cost` (Decimal, Auto-calculated as `total_nights × price_per_night`)
 
-* `id`, which specifies the unique ID for the instructor as an `INTEGER`. This column thus has the `PRIMARY KEY` constraint applied.
-* `problem_set`, which is an `INTEGER` specifying the number of the problem set of which the problem is a part. Problem sets are *not* represented separately, given that each is only identified by a number.
-* `name`, which is the name of the problem set as `TEXT`.
+#### Cars
+- **Purpose**: Store car rental information as part of an itinerary.
+- **The `cars` table includes**:
 
-All columns in the `problems` table are required, and hence should have the `NOT NULL` constraint applied. No other constraints are necessary.
+  - `car_id` (Primary Key): Unique identifier for the car rental entry.
+  - `itinerary_id` (Foreign Key): Links the car rental to a specific itinerary.
+  - `car_name` (String): Name of the car or model.
+  - `rental_company` (String): Name of the car rental company.
+  - `pickup_location` (String): Location where the car is picked up.
+  - `dropoff_location` (String): Location where the car is returned.
+  - `pickup_date` (Date): Date of car pickup.
+  - `dropoff_date` (Date): Date of car drop-off.
+  - `daily_rate` (Decimal): Cost per day for renting the car.
+  - `total_days` (Integer, Auto-calculated): Number of days the car is rented.
+  - `cost` (Decimal, Auto-calculated as `total_days × daily_rate`).
 
-#### Submissions
-
-The `submissions` table includes:
-
-* `id`, which specifies the unique ID for the submission as an `INTEGER`. This column thus has the `PRIMARY KEY` constraint applied.
-* `student_id`, which is the ID of the student who made the submission as an `INTEGER`. This column thus has the `FOREIGN KEY` constraint applied, referencing the `id` column in the `students` table to ensure data integrity.
-* `problem_id`, which is the ID of the problem which the submission solves as an `INTEGER`. This column thus has the `FOREIGN KEY` constraint applied, referencing the `id` column in the `problems` table to ensure data integrity.
-* `submission_path`, which is the path, relative to the database, at which the submission files are stored. It is assumed that all submissions are uploaded to the same server on which the database file is stored, and that submission files can be accessed by following the relative path from the database. Given that this attribute stores a filepath, not the submission files themselves, it is of type affinity `TEXT`.
-* `correctness`, which is the score, as a float from 0 to 1.0, the student received on the assignment. This column is represented with a `NUMERIC` type affinity, which can store either floats or integers.
-* `timestamp`, which is the timestamp at which the submission was made.
-
-All columns are required and hence have the `NOT NULL` constraint applied where a `PRIMARY KEY` or `FOREIGN KEY` constraint is not. The `correctness` column has an additional constraint to check if its value is greater than 0 and less than or equal 1, given that this is the valid range for a correctness score. Similar to the student's `started` attribute, the submission `timestamp` attribute defaults to the current timestamp when a new row is inserted.
-
-#### Comments
-
-The `comments` table includes:
-
-* `id`, which specifies the unique ID for the submission as an `INTEGER`. This column thus has the `PRIMARY KEY` constraint applied.
-* `instructor_id`, which specifies the ID of the instructor who wrote the comment as an `INTEGER`. This column thus has the `FOREIGN KEY` constraint applied, referencing the `id` column in the `instructors` table, which ensures that each comment be referenced back to an instructor.
-* `submission_id`, which specifies the ID of the submission on which the comment was written as an `INTEGER`. This column thus has the `FOREIGN KEY` constraint applied, referencing the `id` column in the `submissions` table, which ensures each comment belongs to a particular submission.
-* `contents`, which contains the contents of the columns as `TEXT`, given that `TEXT` can still store long-form text.
-
-All columns are required and hence have the `NOT NULL` constraint applied where a `PRIMARY KEY` or `FOREIGN KEY` constraint is not.
 
 ### Relationships
 
