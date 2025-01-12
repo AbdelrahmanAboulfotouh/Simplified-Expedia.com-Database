@@ -18,15 +18,10 @@ Out of scope are elements like certificates, final grades, and other non-core at
 
  **This Database Will Support**:
 
-- **User Management**:
   - Creation of customer and admin accounts.
   - Role-based functionalities (e.g., itinerary management for customers, data oversight for admins).
-
-- **Itinerary Management**:
   - Multiple itineraries per user with custom naming.
   - Automatic cost calculation for itineraries based on associated services.
-
-- **Travel Services**:
   - **Flights**: Booking flights with details like cities, dates, and costs.
   - **Hotels**: Booking hotels with check-in/out dates, price per night, and total stay cost.
   - **Car Rentals**: Renting cars with details like company, locations, rental dates, and costs.
