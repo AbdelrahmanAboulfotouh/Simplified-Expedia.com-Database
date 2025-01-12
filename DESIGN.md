@@ -104,9 +104,9 @@ The below entity relationship diagram describes the relationships among the enti
 
 As detailed by the diagram:
 
-   - One user can have multiple itineraries (`1-to-Many` relationship).  
-   - Each itinerary can have multiple flights (`1-to-Many` relationship).  
-   - Each itinerary can have multiple hotel bookings (`1-to-Many` relationship).  
+   - One user can have multiple itineraries (1-to-Many relationship).  
+   - Each itinerary can have multiple flights (1-to-Many relationship).  
+   - Each itinerary can have multiple hotel bookings (1-to-Many relationship).  
    - Each itinerary can have multiple car rentals (1-to-Many relationship).
   
 
