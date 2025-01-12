@@ -16,7 +16,7 @@ Out of scope are elements like certificates, final grades, and other non-core at
 
 ## Functional Requirements
 
-** This Database Will Support:
+ **This Database Will Support**:
 
 - **User Management**:
   - Creation of customer and admin accounts.
