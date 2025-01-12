@@ -93,7 +93,8 @@ All columns are required and hence have the `NOT NULL` constraint applied where 
 
 The below entity relationship diagram describes the relationships among the entities in the database.
 
-![ER Diagram](diagram.png)
+![ER Diagram](https://github.com/user-attachments/assets/2e1fb72e-7e0a-47dd-8af6-136f2cefba5f)
+
 
 As detailed by the diagram:
 
