@@ -1,7 +1,4 @@
-# Simplified-Expedia.com-Database
-# Design Document
-
-By Carter Zenke
+# Simplified-Expedia.com-Database Design Documen
 
 Video overview: (Normally there would be a URL here, but not for this sample assignment!)
 
@@ -29,22 +26,21 @@ Note that in this iteration, the system will not support students responding to 
 
 ## Representation
 
-Entities are captured in SQLite tables with the following schema.
+Entities are captured in MySQL tables with the following schema.
 
 ### Entities
 
 The database includes the following entities:
 
-#### Students
-
-The `students` table includes:
-
-* `id`, which specifies the unique ID for the student as an `INTEGER`. This column thus has the `PRIMARY KEY` constraint applied.
-* `first_name`, which specifies the student's first name as `TEXT`, given `TEXT` is appropriate for name fields.
-* `last_name`, which specifies the student's last name. `TEXT` is used for the same reason as `first_name`.
-* `github_username`, which specifies the student's GitHub username. `TEXT` is used for the same reason as `first_name`. A `UNIQUE` constraint ensures no two students have the same GitHub username.
-* `started`, which specifies when the student began the course. Timestamps in SQLite can be conveniently stored as `NUMERIC`, per SQLite documentation at <https://www.sqlite.org/datatype3.html>. The default value for the `started` attribute is the current timestamp, as denoted by `DEFAULT CURRENT_TIMESTAMP`.
-
+#### Users
+  
+- **Purpose**: Store information about the application's users (both customers and admins).  
+- **The `user` table includes**:
+  - `user_id` (Primary Key)
+  - `username` (Unique, String)
+  - `password` (Hashed, String)
+  - `email` (Unique, String)
+  - `user_type` (Enum: `Admin`, `Customer`)  
 #### Instructors
 
 The `instructors` table includes:
