@@ -98,6 +98,24 @@ The below entity relationship diagram describes the relationships among the enti
 
 As detailed by the diagram:
 
+1. **Users and Itineraries**:
+   - One user can have multiple itineraries (`1-to-Many` relationship).  
+   - `Users.user_id → Itineraries.user_id`  
+
+2. **Itineraries and Flights**:
+   - Each itinerary can have multiple flights (`1-to-Many` relationship).  
+   - `Itineraries.itinerary_id → Flights.itinerary_id`  
+
+3. **Itineraries and Hotels**:
+   - Each itinerary can have multiple hotel bookings (`1-to-Many` relationship).  
+   - `Itineraries.itinerary_id → Hotels.itinerary_id`
+4. **Itineraries and Cars**:
+  - Each itinerary can have multiple car rentals (1-to-Many relationship).
+  - Itineraries.itinerary_id → Cars.itinerary_id.
+  
+
+
+
 * One student is capable of making 0 to many submissions. 0, if they have yet to submit any work, and many if they submit to more than one problem (or make more than one submission to any one problem). A submission is made by one and only one student. It is assumed that students will submit individual work (not group work).
 * A submission is associated with one and only one problem. At the same time, a problem can have 0 to many submissions: 0 if no students have yet submitted work to that problem, and many if more than one student has submitted work for that problem.
 * A comment is associated with one and only one submission, whereas a submission can have 0 to many comments: 0 if an instructor has yet to comment on the submission, and many if an instructor leaves more than one comment on a submission.
