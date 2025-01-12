@@ -16,13 +16,21 @@ Out of scope are elements like certificates, final grades, and other non-core at
 
 ## Functional Requirements
 
-This database will support:
+### This Database Will Support:
 
-* CRUD operations for students and instructors
-* Tracking all versions of student submissions, including multiple submissions for the same problem
-* Adding multiple comments to a student submission from instructors
+- **User Management**:
+  - Creation of customer and admin accounts.
+  - Role-based functionalities (e.g., itinerary management for customers, data oversight for admins).
 
-Note that in this iteration, the system will not support students responding to comments.
+- **Itinerary Management**:
+  - Multiple itineraries per user with custom naming.
+  - Automatic cost calculation for itineraries based on associated services.
+
+- **Travel Services**:
+  - **Flights**: Booking flights with details like cities, dates, and costs.
+  - **Hotels**: Booking hotels with check-in/out dates, price per night, and total stay cost.
+  - **Car Rentals**: Renting cars with details like company, locations, rental dates, and costs.
+
 
 ## Representation
 
