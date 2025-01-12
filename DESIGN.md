@@ -110,8 +110,8 @@ As detailed by the diagram:
    - Each itinerary can have multiple hotel bookings (`1-to-Many` relationship).  
    - `Itineraries.itinerary_id → Hotels.itinerary_id`
 4. **Itineraries and Cars**:
-  - Each itinerary can have multiple car rentals (1-to-Many relationship).
-  - Itineraries.itinerary_id → Cars.itinerary_id.
+   - Each itinerary can have multiple car rentals (1-to-Many relationship).
+   - Itineraries.itinerary_id → Cars.itinerary_id.
   
 
 
