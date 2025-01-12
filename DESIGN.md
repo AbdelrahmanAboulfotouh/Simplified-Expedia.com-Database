@@ -1,18 +1,19 @@
-# Simplified-Expedia.com-Database Design Documen
+# Simplified-Expedia.com-Database Design Document
 
 Video overview: (Normally there would be a URL here, but not for this sample assignment!)
 
 ## Scope
 
-The database for CS50 SQL includes all entities necessary to facilitate the process of tracking student progress and leaving feedback on student work. As such, included in the database's scope is:
+The database for the Expedia.com clone includes all entities necessary to facilitate the process of managing user itineraries and booking travel services. As such, included in the database's scope are:
 
-* Students, including basic identifying information
-* Instructors, including basic identifying information
-* Student submissions, including the time at which the submission was made, the correctness score it received, and the problem to which the submission is related
-* Problems, which includes basic information about the course's problems
-* Comments from instructors, including the content of the comment and the submission on which the comment was left
+- **Users**, including basic identifying information and roles (Admin or Customer).  
+- **Itineraries**, including details such as itinerary name, associated user, and total cost.  
+- **Flights**, including departure and arrival cities, dates, and associated costs.  
+- **Hotels**, including hotel details, location, check-in and check-out dates, price per night, and total cost.  
+- **Car Rentals**, including rental company, pickup/dropoff locations, rental dates, daily rates, and total cost.  
+- **Itinerary Items**, which connect itineraries to individual services, enabling extensibility for future services.  
 
-Out of scope are elements like certificates, final grades, and other non-core attributes.
+Out of scope are elements like multi-leg transit flights, advanced payment processing, loyalty programs, and detailed service provider management.
 
 ## Functional Requirements
 
