@@ -104,20 +104,10 @@ The below entity relationship diagram describes the relationships among the enti
 
 As detailed by the diagram:
 
-1. **Users and Itineraries**:
    - One user can have multiple itineraries (`1-to-Many` relationship).  
-   - `Users.user_id → Itineraries.user_id`  
-
-2. **Itineraries and Flights**:
    - Each itinerary can have multiple flights (`1-to-Many` relationship).  
-   - `Itineraries.itinerary_id → Flights.itinerary_id`  
-
-3. **Itineraries and Hotels**:
    - Each itinerary can have multiple hotel bookings (`1-to-Many` relationship).  
-   - `Itineraries.itinerary_id → Hotels.itinerary_id`
-4. **Itineraries and Cars**:
    - Each itinerary can have multiple car rentals (1-to-Many relationship).
-   - Itineraries.itinerary_id → Cars.itinerary_id.
   
 
 
