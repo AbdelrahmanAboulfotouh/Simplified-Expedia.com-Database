@@ -11,7 +11,6 @@ The database for the Expedia.com clone includes all entities necessary to facili
 - **Flights**, including departure and arrival cities, dates, and associated costs.  
 - **Hotels**, including hotel details, location, check-in and check-out dates, price per night, and total cost.  
 - **Car Rentals**, including rental company, pickup/dropoff locations, rental dates, daily rates, and total cost.  
-- **Itinerary Items**, which connect itineraries to individual services, enabling extensibility for future services.  
 
 Out of scope are elements like multi-leg transit flights, advanced payment processing, loyalty programs, and detailed service provider management.
 
