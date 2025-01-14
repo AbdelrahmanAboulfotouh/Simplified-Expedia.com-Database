@@ -179,3 +179,15 @@ The chosen indexes significantly improve query performance for the following sce
 
 By aligning the indexes with the typical query patterns, the database ensures minimal query latency, better resource utilization, and faster response times for end-users.
 
+### Limitations of the Design:
+ 
+   - The schema does not naturally accommodate complex itineraries with multiple destinations or layovers within the same itinerary.
+
+   - Handling dynamic pricing (e.g., seasonal rates, bulk discounts) or flexible costs (e.g., coupons) is not natively supported and would require additional 
+     tables or extensive logic.
+
+   - There is no provision to represent user-specific preferences or historical interactions, such as preferred airlines, types of cars, or hotel chains.
+
+   - The schema does not support historical tracking or analytics (e.g., changes in hotel prices over time or itinerary modifications). Adding audit logs or 
+     temporal tables would require additional structures. 
+
