@@ -164,7 +164,7 @@ CREATE INDEX Hotels_query_optimizing ON Hotels(itinerary_id);
 **Reasoning:**
 Queries commonly request hotel details for a given itinerary (e.g., `SELECT * FROM Hotels WHERE itinerary_id = 1`). This index ensures efficient access to hotel data associated with a particular `itinerary_id`.
 
-## Impact of Indexes
+### Impact of Indexes
 
 The chosen indexes significantly improve query performance for the following scenarios:
 
