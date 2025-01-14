@@ -1,7 +1,8 @@
+
 --CREATE  DATABASE Expedia ;
 
 CREATE TABLE Users (
-    user_id INT AUTO_INCREMENT  ,
+    user_id INT AUTO_INCREMENT,
     username VARCHAR(255) Unique NOT NULL  ,
     Password  VARCHAR(32) NOT NULL,
     email VARCHAR(255) Unique,
@@ -42,8 +43,10 @@ CREATE TABLE Hotels
     check_in_date Date NOT NULL,
     check_out_date Date NOT NULL,
     price_per_night DECIMAL,
-    total_nights INT NOT NULL,
-    cost Decimal(10,2 ) NOT NULL,
+
+    total_nights INT AS (DATEDIFF(check_out_date, check_in_date)) STORED,
+    cost DECIMAL(10, 2) AS (price_per_night * total_nights) STORED,
+
     Primary Key(hotel_id),
     FOREIGN KEY(itinerary_id) REFERENCES Itineraries(itinerary_id)
 
@@ -70,6 +73,20 @@ FOREIGN KEY(itinerary_id) REFERENCES Itineraries(itinerary_id)
 
 );
 
-CREATE VIEW FULL_VIEW AS
-SELECT username,arrival_city,hotel_name,car_name FROM Itineraries 
-JOIN Users
+CREATE VIEW User_Profile AS
+    SELECT username as "Name" ,email AS "E-mail",itinerary_name AS "Itinerary",departure_city AS "Departure_city" ,arrival_city AS "Arrival-City",hotel_name AS "Hotel",car_name as "Car-Name" FROM Itineraries 
+    INNER  JOIN
+        Users on Users.user_id = Itineraries.user_id
+    INNER join 
+        Cars on Cars.itinerary_id = Itineraries.itinerary_id
+    INNER join 
+        Hotels on Hotels.itinerary_id = Itineraries.itinerary_id
+    INNER JOIN
+        Flights on Flights.itinerary_id = Itineraries.itinerary_id;
+
+
+CREATE INDEX Users_query_optimizing ON Users(user_id,username);
+CREATE INDEX Itineraries_query_optimizing ON Itineraries(user_id,itinerary_id);
+CREATE INDEX Flights_query_optimizing ON Flights(itinerary_id);
+CREATE INDEX Cars_query_optimizing ON Cars(itinerary_id);
+CREATE INDEX Hotels_query_optimizing ON Hotels(itinerary_id);
