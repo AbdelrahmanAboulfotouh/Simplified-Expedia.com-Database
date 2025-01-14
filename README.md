@@ -115,13 +115,67 @@ As detailed by the diagram:
 
 
 
-
 ## Optimizations
 
-Per the typical queries in `queries.sql`, it is common for users of the database to access all submissions submitted by any particular student. For that reason, indexes are created on the `first_name`, `last_name`, and `github_username` columns to speed the identification of students by those columns.
+Based on the common queries performed on the database, the following indexes have been created to optimize query performance:
 
-Similarly, it is also common practice for a user of the database to concerned with viewing all students who submitted work to a particular problem. As such, an index is created on the `name` column in the `problems` table to speed the identification of problems by name.
+### Indexes on `Users` Table
 
-## Limitations
+**Index Created:**
+```sql
+CREATE INDEX Users_query_optimizing ON Users(user_id, username);
+```
+**Reasoning:**
+Many queries involve looking up users by their `user_id` to retrieve their profile information (e.g., `SELECT username FROM Users WHERE user_id = 1`). This index speeds up such lookups by indexing both the `user_id` and `username` columns.
 
-The current schema assumes individual submissions. Collaborative submissions would require a shift to a many-to-many relationship between students and submissions.
+### Indexes on `Itineraries` Table
+
+**Index Created:**
+```sql
+CREATE INDEX Itineraries_query_optimizing ON Itineraries(user_id, itinerary_id);
+```
+**Reasoning:**
+Queries frequently retrieve all itineraries for a specific user (e.g., `SELECT * FROM Itineraries WHERE user_id = 1`). By indexing `user_id` and `itinerary_id`, these queries are optimized to quickly locate itineraries belonging to a particular user.
+
+### Index on `Flights` Table
+
+**Index Created:**
+```sql
+CREATE INDEX Flights_query_optimizing ON Flights(itinerary_id);
+```
+**Reasoning:**
+Queries often retrieve flights associated with a specific itinerary (e.g., `SELECT * FROM Flights WHERE itinerary_id = 1`). This index enables faster lookups of flights linked to a particular `itinerary_id`.
+
+### Index on `Cars` Table
+
+**Index Created:**
+```sql
+CREATE INDEX Cars_query_optimizing ON Cars(itinerary_id);
+```
+**Reasoning:**
+Similar to flights, queries frequently involve retrieving cars for a specific itinerary (e.g., `SELECT * FROM Cars WHERE itinerary_id = 1`). Indexing `itinerary_id` in the `Cars` table improves these query speeds.
+
+### Index on `Hotels` Table
+
+**Index Created:**
+```sql
+CREATE INDEX Hotels_query_optimizing ON Hotels(itinerary_id);
+```
+**Reasoning:**
+Queries commonly request hotel details for a given itinerary (e.g., `SELECT * FROM Hotels WHERE itinerary_id = 1`). This index ensures efficient access to hotel data associated with a particular `itinerary_id`.
+
+## Impact of Indexes
+
+The chosen indexes significantly improve query performance for the following scenarios:
+
+1. **User Profile Retrieval:**
+   - Queries like `SELECT username FROM Users WHERE user_id = 1` are optimized by the index on `Users`.
+
+2. **Itinerary Listing:**
+   - Queries such as `SELECT itinerary_name, total_cost_USD FROM Itineraries WHERE user_id = 1` benefit from the index on `Itineraries`.
+
+3. **Details for Specific Itineraries:**
+   - Queries for flights, cars, and hotels (e.g., `SELECT * FROM Flights WHERE itinerary_id = 1`) are accelerated by the respective indexes on `Flights`, `Cars`, and `Hotels`.
+
+By aligning the indexes with the typical query patterns, the database ensures minimal query latency, better resource utilization, and faster response times for end-users.
+
