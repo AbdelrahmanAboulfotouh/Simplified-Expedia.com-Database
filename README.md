@@ -1,6 +1,5 @@
 # Simplified Expedia.com Database Design 
 
-Video overview: (Normally there would be a URL here, but not for this sample assignment!)
 
 ## Scope
 
